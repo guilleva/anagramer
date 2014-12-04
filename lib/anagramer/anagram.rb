@@ -18,7 +18,7 @@ module Anagramer
 
     def find(words)
       [].tap do |result|
-        words.map { |w| anagram_key(w) }.uniq.each do |key|
+        words.map { |w| anagram_key(w.upcase) }.uniq.each do |key|
           result.concat @anagrams[key]
         end
       end
@@ -26,12 +26,8 @@ module Anagramer
 
     protected
 
-    # generates a key for a given word that should be common
-    # between its anagrams. If all the words are in upper case or
-    # down case, we could remove the ".downcase" part to improve
-    # performance and reduce memory usage
     def anagram_key(word)
-      word.downcase.chars.sort.join
+      word.chars.sort.join
     end
   end
 end
